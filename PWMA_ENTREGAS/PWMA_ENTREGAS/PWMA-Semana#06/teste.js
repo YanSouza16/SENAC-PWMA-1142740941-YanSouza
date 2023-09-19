@@ -4,3 +4,7 @@ if (codCliente=="1234"){
 } else{
     console.log("Cliente NÃO OK")
 }
+function validarloginPassword(){
+  var Senha=  document.getElementById('loginPassword')
+   alert(Senha)
+}
