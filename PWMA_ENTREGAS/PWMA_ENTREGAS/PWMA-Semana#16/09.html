@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conheça nossa loja de roupa virtual!">
+  <title>Saúde e Bem estar</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    body {
+      font-size: 100%;
+      background: linear-gradient(to right, #3498db, #2c3e50);
+    }
+  
+    .cabecalho {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+    }
+  
+    .cabecalho-imagem {
+      height: 80px;
+    }
+  
+    .cabecalho-menu {
+      display: flex;
+      gap: 32px;
+    }
+  
+    .conteudo {
+      margin-bottom: 45px;
+      border-top: 0.4px solid #dfc8c8;
+      padding: 20px;
+    }
+  
+    .conteudo-principal {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .conteudo-principal-escrito {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+  
+    .conteudo-principal-escrito-titulo {
+      font-family: 'Righteous', cursive;
+      font-weight: 400;
+      font-size: 64px;
+      color: rgb(24, 22, 22);
+      text-decoration: none;
+    }
+  
+    .conteudo-principal-escrito-subtitulo {
+      font-family: 'Sarala', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: rgb(12, 12, 12);
+      text-decoration: none;
+    }
+  
+    .cabecalho-menu button.conteudo-principal-escrito-botao,
+.conteudo-principal button.conteudo-principal-escrito-botao {
+  background-color: rgb(60, 158, 190);
+  width: 200px;
+  height: 60px;
+  border: 2px solid #3c9eba; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  border-radius: 20px;
+  font-family: 'Sarala', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: #040404;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.cabecalho-menu button.conteudo-principal-escrito-botao:hover,
+.conteudo-principal button.conteudo-principal-escrito-botao:hover {
+  background-color: rgb(255, 255, 255);
+  color: #fff !important; 
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+  
+    .balao-menu a {
+      color: white !important;
+      text-decoration: none;
+    }
+  
+    .conteudo-principal-imagem {
+      height: 470px;
+    }
+  
+    .conteudo-secundario {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-top: 48px;
+    }
+  
+    .conteudo-secundario-titulo {
+      border-top: 0.4px solid #3a2694;
+      padding-top: 48px;
+      font-family: 'Sarala', cursive;
+      font-weight: 400;
+      font-size: 24px;
+      color: rgb(12, 12, 12);
+      margin-bottom: 16px;
+    }
+  
+    .conteudo-secundario-paragrafo {
+      font-family: 'Sarala', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: rgb(15, 15, 15);
+    }
+  
+    .rodape {
+      padding: 32px;
+      border-top: 0.4px solid #FFF2E7;
+      text-align: center;
+    }
+  
+    .informacoes-rodape,
+    .redes-sociais {
+      margin-bottom: 20px;
+    }
+  
+    .informacoes-rodape p {
+      font-size: 18px;
+      color: #333;
+      margin: 8px 0;
+    }
+  
+    .redes-sociais a {
+      margin: 0 10px;
+    }
+  
+    .rodape-imagem {
+      height: 170px;
+      display: block;
+      margin: 0 auto;
+    }
+  
+    .cabecalho-menu-item:hover {
+      color: rgb(94, 104, 110);
+    }
+    
+  
+    .balao-menu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      background-color: rgb(60, 158, 190);
+      width: 200px;
+      height: 60px;
+      border: none;
+      box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      font-family: 'Sarala', sans-serif;
+      font-weight: 300;
+      font-size: 24px;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="cabecalho">
+    <a href="09.html"><img src="logo.png" class="cabecalho-imagem"></a>
+
+
+    <nav class="cabecalho-menu">
+      <button class="conteudo-principal-escrito-botao"><a href="Sm.html">Obesidade</a></button>
+      <button class="conteudo-principal-escrito-botao"><a href="tratamento.html">Tratamento</a></button>
+      <button class="conteudo-principal-escrito-botao"><a href="saudemental.html">Dicas de saúde</a></button>
+      <button class="conteudo-principal-escrito-botao"><a href="procure.html">Procure um médico</a></button>
+    </nav>
+  </header>
+
+  <main class="conteudo">
+    <section class="conteudo-principal">
+      <div class="conteudo-principal-escrito">
+        <h1 class="conteudo-principal-escrito-titulo">Saúde e Bem estar</h1>
+        <h2 class="conteudo-principal-escrito-subtitulo">Uma boa saúde pode mudar tudo</h2>
+        <button class="balao-menu"><a href="aerobic.html">Calcule seu Imc</a></button>
+      </div>
+      <img class="conteudo-principal-imagem" src="body.png" alt="Imagem">
+    </section>
+
+    <section class="conteudo-secundario">
+      <h3 class="conteudo-secundario-titulo">Mudanças comportamentais no estilo de vida</h3>
+      <p class="conteudo-secundario-paragrafo">Mantenha-se ativo, mantenha-se <strong>saudável</strong></p>
+      <p class="conteudo-secundario-paragrafo">Previna <strong>doenças</strong> e <strong>limitações</strong></p>
+      <p class="conteudo-secundario-paragrafo">Encontre <strong>equilíbrio</strong> e <strong>harmonia</strong> para uma
+        vida plena.</p>
+      <p class="conteudo-secundario-paragrafo">Seu <strong>bem estar</strong> é nosso foco</p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="informacoes-rodape">
+      <p>Endereço: Av. Exemplo, 123 - Cidade, Estado</p>
+      <p>Telefone: (12) 3456-7890</p>
+      <p>Email: contato@saudeebemestar.com</p>
+    </div>
+
+    <div class="redes-sociais">
+      <a href="#" target="_blank">Facebook</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">Twitter</a>
+    </div>
+
+    <img class="rodape-imagem" src="rodape.png" alt="Rodapé">
+  </footer>
+</body>
+
+</html>

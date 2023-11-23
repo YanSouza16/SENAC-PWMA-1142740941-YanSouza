@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de IMC</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #3498db, #2c3e50);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #explanation,
+    #calculator {
+      max-width: 600px;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button.selected {
+      background-color: #2980b9 !important;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input:focus {
+      border-color: #2980b9;
+    }
+
+    button,
+    input {
+      transition: background-color 0.5s, border-color 0.3s;
+    }
+
+    #result {
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    #result.show-result {
+      opacity: 1;
+    }
+
+    #recommended-exercises {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    #interpretation {
+      margin-top: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+
+    <div>
+      <a href="09.html"><img src="logo.png" class="cabecalho-imagem"></a>
+    </div>
+    <div>
+    <h1>Calculadora de IMC</h1>
+    <p>Saiba como está sua saúde em relação ao seu peso e altura.</p>
+  </div>
+</header>
+
+  <section id="content">
+    <article id="explanation">
+      <p>Saber o Índice de Massa Corporal (IMC) é fundamental para avaliar se o seu peso está dentro de faixas consideradas saudáveis.</p>
+      <p>O IMC é uma medida útil para identificar possíveis riscos à saúde relacionados ao peso, como a subnutrição, o peso normal, o excesso de peso e a obesidade.</p>
+      <p>Calcule o seu IMC abaixo para ter uma visão geral do seu estado de saúde em relação ao seu peso e altura.</p>
+    </article>
+
+    <article id="calculator">
+      <label for="name">Nome:</label>
+      <input type="text" id="name" placeholder="Digite o seu nome" required>
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" placeholder="Digite o seu e-mail" required>
+
+      <label for="ddd">DDD:</label>
+      <input type="text" id="ddd" placeholder="Digite o DDD" required>
+
+      <label for="contact">Número de Contato:</label>
+      <input type="text" id="contact" placeholder="Digite o número de contato" required>
+
+      <label for="age">Idade:</label>
+      <input type="number" id="age" placeholder="Digite a sua idade" required>
+
+      <label for="gender">Sexo:</label>
+      <button onclick="selectGender('male')" id="maleButton">Homem</button>
+      <button onclick="selectGender('female')" id="femaleButton">Mulher</button>
+
+      <label for="weight">Peso (kg):</label>
+      <input type="number" id="weight" placeholder="Digite o seu peso" required>
+
+      <label for="height">Altura (m):</label>
+      <input type="number" id="height" placeholder="Digite a sua altura" required step="0.01">
+
+      <button onclick="calculateIMC()">Calcular IMC</button>
+
+      <div id="result"></div>
+      <div id="recommended-exercises"></div>
+    </article>
+
+    
+    <article id="user-info">
+      <h2>Informações do Usuário</h2>
+      <table id="user-info-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>DDD</th>
+            <th>Número de Contato</th>
+            <th>Idade</th>
+          </tr>
+        </thead>
+        <tbody id="user-info-body">
+          
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <section id="interpretation">
+    
+  </section>
+
+  <script>
+    let selectedGender = '';
+
+    
+    const storedData = JSON.parse(localStorage.getItem('userData')) || {};
+
+    
+    document.getElementById('name').value = storedData.name || '';
+    document.getElementById('email').value = storedData.email || '';
+    document.getElementById('ddd').value = storedData.ddd || '';
+    document.getElementById('contact').value = storedData.contact || '';
+    document.getElementById('age').value = storedData.age || '';
+
+    function selectGender(gender) {
+      selectedGender = gender;
+
+      const buttons = document.querySelectorAll("#calculator button");
+      buttons.forEach(button => {
+        if (button.textContent.toLowerCase() === gender) {
+          button.classList.add("selected");
+        } else {
+          button.classList.remove("selected");
+        }
+      });
+    }
+
+    function calculateIMC() {
+      
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const ddd = document.getElementById("ddd").value;
+      const contact = document.getElementById("contact").value;
+      const age = parseInt(document.getElementById("age").value);
+      const weight = parseFloat(document.getElementById("weight").value);
+      const height = parseFloat(document.getElementById("height").value);
+
+      if (!name || !email || !ddd || !contact || isNaN(age) || isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+        alert("Por favor, preencha todos os campos antes de calcular o IMC.");
+        return;
+      }
+
+      
+      const userData = {
+        name,
+        email,
+        ddd,
+        contact,
+        age
+      };
+
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      
+      updateUserInfoTable();
+
+      const imc = weight / (height * height);
+      const resultElement = document.getElementById("result");
+      const exercisesElement = document.getElementById("recommended-exercises");
+
+      let result = `${name}, seu IMC é ${imc.toFixed(2)}. `;
+
+      if (imc < 18.5) {
+        result += "Você está abaixo do peso.";
+      } else if (imc < 24.9) {
+        result += "Seu peso está normal.";
+      } else if (imc < 29.9) {
+        result += "Você está acima do peso.";
+        showRecommendedExercises(imc);
+      } else {
+        result += "Você está na categoria de obesidade.";
+        showRecommendedExercises(imc);
+      }
+
+      resultElement.innerHTML = result;
+      resultElement.classList.add("show-result");
+    }
+
+    function showRecommendedExercises(imc) {
+      const exercisesElement = document.getElementById("recommended-exercises");
+      const imcTable = document.getElementById("imcTable");
+      const classification = getIMCClassification(imc);
+
+      
+      const filteredExercises = recommendedExercises.filter(exercise => exercise.classification === classification || exercise.classification === 'Obesidade');
+
+      if (filteredExercises.length > 0) {
+        exercisesElement.innerHTML = `<h3>Exercícios Recomendados para ${classification}:</h3><ul>${filteredExercises.map(exercise => `<li>${exercise.name}</li>`).join('')}</ul>`;
+      } else {
+        exercisesElement.innerHTML = `<p>Não há exercícios recomendados para a sua classificação de IMC.</p>`;
+      }
+    }
+
+    function getIMCClassification(imc) {
+      if (imc < 18.5) {
+        return 'Abaixo do peso';
+      } else if (imc < 24.9) {
+        return 'Peso normal';
+      } else if (imc < 29.9) {
+        return 'Acima do peso';
+      } else {
+        return 'Obesidade';
+      }
+    }
+
+    
+    function updateUserInfoTable() {
+      const userInfoBody = document.getElementById('user-info-body');
+      while (userInfoBody.firstChild) {
+        userInfoBody.removeChild(userInfoBody.firstChild);
+      }
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      const newRow = userInfoBody.insertRow();
+      newRow.insertCell().textContent = userData.name;
+      newRow.insertCell().textContent = userData.email;
+      newRow.insertCell().textContent = userData.ddd;
+      newRow.insertCell().textContent = userData.contact;
+      newRow.insertCell().textContent = userData.age;
+    }
+
+    const recommendedExercises = [
+      { name: 'Caminhada', classification: 'Peso normal' },
+      { name: 'Corrida', classification: 'Peso normal' },
+      { name: 'Ciclismo', classification: 'Peso normal' },
+      { name: 'Natação', classification: 'Peso normal' },
+      { name: 'Pular Corda', classification: 'Acima do peso' },
+      { name: 'Dança Aeróbica', classification: 'Acima do peso' },
+      { name: 'Spinning', classification: 'Acima do peso' },
+      { name: 'Aeróbica Aquática', classification: 'Acima do peso' },
+      { name: 'Remo', classification: 'Acima do peso' },
+      { name: 'Escalada', classification: 'Acima do peso' },
+      { name: 'Jump', classification: 'Acima do peso' },
+      { name: 'Step', classification: 'Acima do peso' },
+      { name: 'Esportes em Equipe', classification: 'Acima do peso' },
+      { name: 'Boxe', classification: 'Acima do peso' },
+      { name: 'Patinação', classification: 'Acima do peso' },
+      { name: 'Esqui', classification: 'Acima do peso' },
+      { name: 'Saltos', classification: 'Acima do peso' },
+      { name: 'Zumba', classification: 'Acima do peso' },
+      { name: 'Pilates', classification: 'Acima do peso' },
+      { name: 'Pular Corda', classification: 'Obesidade' },
+      { name: 'Jump', classification: 'Obesidade' },
+      
+    ];
+  </script>
+</body>
+
+</html>
